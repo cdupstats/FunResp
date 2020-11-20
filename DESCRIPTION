@@ -1,0 +1,21 @@
+Package: FunResp
+Title: Multicategory logit models for habitat selection analysis including functional response
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Claudia",
+           family = "Dupke",
+           role = c("aut", "cre"),
+           email = "claudia.dupke@gmail.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Discrete choice models are implemented as mixed-effects
+  baseline-category logit models to analyze the variation in habitat selection
+  of moving animal over seasonal and diurnal scales. Specifically, changes
+  in habitat use with respect to habitat availability can be investigated leading to  
+  functional response curves that can be fitted using Holling’s formulas.
+License: `CC0 1.0 Universal()`
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Depends: 
+    R (>= 2.10)
