@@ -1,9 +1,3 @@
-# TODO: Add comment
-# 
-# Author: dupke
-###############################################################################
-
-
 #' Multicategory logit models for all habitats
 #'
 #' Calculates a given logistic regression models for all habitat types separately except from but the baseline category. Is used in function multicat1. 

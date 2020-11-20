@@ -64,7 +64,7 @@ optimHolling <- function(x,y){
 	a <- OPT[[type]]$par[1]
 	b <- OPT[[type]]$par[2]
 	#get y=x
-	x_star <- get_xstar(a,b,type)
+	#x_star <- get_xstar(a,b,type)
 	
-	data.frame(type=type,a = round(a,5),b = round(b,5), x_star = ifelse(x_star ==0, 0,round(x_star,2)), value = round(OPT[[type]]$value,5))
+	data.frame(type=type,a = round(a,5),b = round(b,5), value = round(OPT[[type]]$value,5))
 }
