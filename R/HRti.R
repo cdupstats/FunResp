@@ -1,9 +1,3 @@
-# TODO: Add comment
-# 
-# Author: dupke
-###############################################################################
-
-	
 #' Availability of habitats within time-indexed home ranges
 #'
 #' This function allows you to obtain the a list of the number of grid cells covered with each habitat type within a 100% mcp 
