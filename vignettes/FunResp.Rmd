@@ -10,11 +10,11 @@ vignette: >
   %\VignetteIndexEntry{Vignette for the FunResp package}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
-abstract: "Discrete choice models are implemented as mixed-effects
-  baseline-category logit models to analyze the variation in habitat selection
+abstract: "Test Discrete choice models are implemented as mixed-effects
+  baseline-category logit models to analyze the variation  of habitat category use 
   of moving animal over various temporal scales. Specifically, changes
   in habitat use with respect to habitat availability can be investigated leading to  
-  functional response curves that further can be fitted by using Holling’s formulas. \n \n \n"
+  functional response curves that further can be fitted to Holling's types. \n \n \n"
 editor_options: 
   
   chunk_output_type: console
@@ -38,7 +38,7 @@ knitr::opts_chunk$set(fig.width=8.5, fig.height=5.5, fig.align='center', warning
 ##  Getting started
  
  Load packages and data
-```{r, echo = F, message = F}
+```{r, echo = T, message = F}
    library(FunResp)
    library(mgcv)
    data(Data)
@@ -47,7 +47,7 @@ knitr::opts_chunk$set(fig.width=8.5, fig.height=5.5, fig.align='center', warning
  
  Explore the data (for your own data use other packages for an in-depth analysis). 
  
-```{r, echo = F, fig.width=8, fig.height=8}
+```{r, echo = T, fig.width=8, fig.height=8}
    image(Landscapegrid,attr="habitats")
    points(Data$x,Data$y,col=as.numeric(Data$burst)+10)
 
@@ -67,7 +67,7 @@ knitr::opts_chunk$set(fig.width=8.5, fig.height=5.5, fig.align='center', warning
 Get availability of habitat types in monthly home ranges 
 and merge with landscape data.
 
-```{r, echo = F, fig.width=8, fig.height=8}
+```{r, echo = T, fig.width=8, fig.height=8}
    par(mfrow=c(3,4),mar=c(1,1,1,1),oma=c(1,1,1,1))
    HRavail <- HRti(Data,varti="month",Landscapegrid,plot=TRUE)
 
@@ -102,7 +102,7 @@ Check whether you have enough data for each habitat type. Here, we use a very sm
   
  Estimate the multicategory logit models, one for each habitat except the baseline category and plot the results. This is just a small toy data set for the purpose of demonstration. Therefore, the patterns here are somewhat disappointing. 
    
-```{r, echo = F, fig.width=8, fig.height=8}
+```{r, echo = T, fig.width=8, fig.height=8}
    MM <- multicat1(Data2,HRavail,f1,sp=c(1,2,1))
    names(MM) <- habitats[-1]
    par(mfrow=c(3,6),mar=c(1,1,1,1),oma=c(1,1,1,1))
