@@ -10,9 +10,9 @@ vignette: >
   %\VignetteIndexEntry{Vignette for the FunResp package}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
-abstract: "Test Discrete choice models are implemented as mixed-effects
+abstract: "Discrete choice models are implemented as mixed-effects
   baseline-category logit models to analyze the variation  of habitat category use 
-  of moving animal over various temporal scales. Specifically, changes
+  of moving animal over various temporal scales ( see an application here [Dupke et al. 2017](https://onlinelibrary.wiley.com/doi/full/10.1111/ecog.02152)). Specifically, changes
   in habitat use with respect to habitat availability can be investigated leading to  
   functional response curves that further can be fitted to Holling's types. \n \n \n"
 editor_options: 
@@ -45,7 +45,7 @@ knitr::opts_chunk$set(fig.width=8.5, fig.height=5.5, fig.align='center', warning
    data(Landscapegrid)
 ```  
  
- Explore the data (for your own data use other packages for an in-depth analysis). 
+ The provided toy dataset consists of GPS-telemetry data of three adult roe deer recorded in 2009/2010 in the Bavarian Forest Nationalpark, Germany. Explore the data (for your own data use other packages for an in-depth analysis). 
  
 ```{r, echo = T, fig.width=8, fig.height=8}
    image(Landscapegrid,attr="habitats")
@@ -56,7 +56,7 @@ knitr::opts_chunk$set(fig.width=8.5, fig.height=5.5, fig.align='center', warning
    table(Data[,c("month","burst")])
 ``` 
  
- Get landscape information
+ What you need to apply multicategory models is a representation of the study area as categories, e.g. habitat types.
  
 ```{r}
   Data$habitat  <- over(SpatialPoints(cbind(Data$x,Data$y)),Landscapegrid)$habitat
@@ -64,8 +64,7 @@ knitr::opts_chunk$set(fig.width=8.5, fig.height=5.5, fig.align='center', warning
 ``` 
 ## Setting up Multicategory logit models
 
-Get availability of habitat types in monthly home ranges 
-and merge with landscape data.
+Get the availability of each habitat type in the monthly home ranges.
 
 ```{r, echo = T, fig.width=8, fig.height=8}
    par(mfrow=c(3,4),mar=c(1,1,1,1),oma=c(1,1,1,1))
@@ -100,7 +99,7 @@ Check whether you have enough data for each habitat type. Here, we use a very sm
   Data2$habitat  <- factor(relevel(Data2$habitat, ref="old mixed")) #make sure that baseline habitat is at first position like relevel(Data$habitat, ref="old mixed")
 ```
   
- Estimate the multicategory logit models, one for each habitat except the baseline category and plot the results. This is just a small toy data set for the purpose of demonstration. Therefore, the patterns here are somewhat disappointing. 
+ Estimate the multicategory logit models, one for each habitat except the baseline category and plot the results. This is just a small toy dataset for the purpose of demonstration. Therefore, the patterns here are somewhat disappointing. 
    
 ```{r, echo = T, fig.width=8, fig.height=8}
    MM <- multicat1(Data2,HRavail,f1,sp=c(1,2,1))
@@ -168,7 +167,7 @@ HTty <- do.call(rbind, HT)
 par(mfrow=c(2,3),mar=c(4,4,1,1),oma=c(2,2,2,2))
 invisible(lapply(1:length(Preds),function(ty) {
 			x <- Preds[[ty]][,"relavail"]	
-			plot(x,Preds[[ty]][,"fit"],main=names(Preds)[ty],type="l",ylab="Proportion of use",xlab="Relative availability")
+			plot(x,Preds[[ty]][,"fit"],main=names(Preds)[ty],type="l",ylab="Proportion of use",xlab="Relative availability", xlim=c(0, max(x)), ylim = c(0,max(Preds[[ty]][,"fit"])))
 			if(HTty[ty,"type"]==1){
 				lines(x,Holling1(x,HTty[ty,"a"]),col="red", lty=3, lwd=3)
 			}
@@ -197,7 +196,7 @@ HTty <- do.call(rbind, HT)
 par(mfrow=c(4,3),mar=c(4,4,1,1),oma=c(2,2,2,2))
 invisible(lapply(1:length(FemalesNight),function(ty) {
 			x <- FemalesNight[[ty]][,"RA"]	
-			plot(x,FemalesNight[[ty]][,"fit"],main=names(FemalesNight)[ty],type="l",ylab="Proportion of use",xlab="Relative availability")
+			plot(x,FemalesNight[[ty]][,"fit"],main=names(FemalesNight)[ty],type="l",ylab="Proportion of use",xlab="Relative availability", ylim = c(0,max(FemalesNight[[ty]][,"fit"])))
 			if(HTty[ty,"type"]==1){
 				lines(x,Holling1(x,HTty[ty,"a"]),col="red", lty=3, lwd=3)
 			}
